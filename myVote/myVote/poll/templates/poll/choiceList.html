@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+        <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Choice ID</th>
+                <th scope="col">ชื่อตัวเลือก</th>
+                <th scope="col">ลบ</th>
+            </tr>
+        </thead>
+        {% for choice in all_choice %}
+        <tr>
+            <td>{{ choice.id }}</td>
+            <td>{{ choice.subject }}</td>
+            <td>
+                <a href="{% url 'deleteChoice' choice_id=choice.id %}">
+                    <div class="btn btn-warning" id="{{choice.id}}">ลบ</div>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'addChoice' poll_id=poll.id %}">
+        <div class="btn btn-success" id="add">เพิ่ม</div>
+    </a>
+    </div>
+{% endblock %}

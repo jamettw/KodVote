@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <h1 class="headva">My Polls</h1><hr class="shadow-sm">
+        <div class="row">
+            {% for poll in all_poll %}
+                    <div class="col-3 my-2">
+                        <div class="card p-2 my-2 h-100 text-center shadow">
+                            {% if poll.picture.url is not null %}
+                            <img src="{{poll.picture.url}}" class="card-img-top align-self-center" style="height: 150px; width: 150px;">
+                            {% else %}
+                            <img src="{% static 'image/logo.png' %}" class="card-img-top align-self-center" style="height: 150px; width: 150px;">
+                            {% endif %}
+                            <div class="card-body pb-0">
+                                <h5 class="card-title">{{poll.subject}}</h5><br>
+                                <p class="text-success" style="font-size: 0.8rem;">Start: {{poll.start_date}}</p>
+                                <p class="text-danger" style="font-size: 0.8rem;">End: {{poll.end_date}}</p>
+                                <a href="{% url 'editPoll' poll_id=poll.id %}" class="btn btn-warning mx-2">แก้ไข</a>
+                                <a href="{% url 'deletePoll' poll_id=poll.id %}" class="btn btn-danger mx-2">ลบ</a>
+                            </div>
+                        </div>
+                    </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

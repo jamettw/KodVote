@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="align-self-center">
+            <div class="card p-5 shadow-sm mb-5 rounded">
+                <div class="align-self-center text-center">
+                    <h1>สร้างตัวเลือก</h1>
+                </div><br>
+                <form method="POST" action="{% url 'addChoice' poll_id %}" enctype='multipart/form-data'>
+                {% csrf_token %}
+                    <div class="col align-self-center">
+                        <div class="form-group mr-3">
+                            <label for="title">หัวขัอ:</label>
+                            <input type="text" class="form-control ml-3" id="title" name="title" value="{{title}}" required>
+                        </div>
+                        <div class="form-group mr-3">
+                            <label for="picture">รูป:</label>
+                            <input type="file" class="form-control ml-3" id="picture" name="picture" value="{{picture}}" style="width:250px;">
+                        </div>
+                        <div class="text-center mt-3">
+                            <button type="submit" class="btn btn-success mx-3" name="success">เสร็จสิ้น</button>
+                            <button type="submit" class="btn btn-success mx-3" name="more_choice">สร้างตัวเลือกเพิ่ม</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

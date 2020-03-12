@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="align-self-center">
+            <div class="card p-5 shadow-sm mb-5 rounded">
+                <div class="align-self-center text-center">
+                    <h1>สร้างห้องโหวต</h1>
+                </div><br>
+                <form method="POST" action="{% url 'addPoll'%}" enctype='multipart/form-data'>
+                {% csrf_token %}
+                    <div class="col align-self-center">
+                        <div class="form-group mr-3">
+                            <label for="title">หัวขัอ:</label>
+                            <input type="text" class="form-control ml-3" id="title" name="title" value="{{title}}" required>
+                        </div>
+                        <div class="form-group mr-3">
+                            <label for="picture">รูป:</label>
+                            <input type="file" class="form-control ml-3" id="picture" name="picture" value="{{picture}}" style="width:250px;">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">คำอธิบาย:</label>
+                            <textarea type="text" class="form-control ml-3" id="description" name="description" value="{{description}}" rows="10" cols="30" required></textarea>
+                        </div>
+                        <div class="form-group d-inline-block">
+                            <label for="start_date">วัน/เวลาที่เริ่มการโหวต:</label>
+                            <input type="datetime-local" class="form-control ml-3" id="start_date" name="start_date" value="{{start_date}}" style="width:250px;" required>
+                        </div>
+                        <div class="form-group d-inline-block">
+                            <label for="end_date">วัน/เวลาสิ้นสุดการโหวต:</label>
+                            <input type="datetime-local" class="form-control ml-3" id="end_date" name="end_date" value="{{end_date}}" style="width:250px;" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">รหัสห้องโหวต:</label>
+                            <input type="password" class="form-control ml-3" id="password" name="password" value="{{password}}" style="width:250px;">
+                        </div>
+                        {% if msg %}<p class="text-success">{{msg}}</p>{% endif %}
+                        <div class="text-center mt-3">
+                            <button type="submit" class="btn btn-success">สร้างห้อง</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

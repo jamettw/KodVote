@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div>
+    <div class="container">
+        <h1 class="headva">Avaliable</h1><hr class="shadow-sm">
+        <div class="row">
+            {% for poll in all_poll%}
+                {% if time >= poll.start_date and time < poll.end_date %}
+                    <div class="col-3 my-2">
+                        <div class="card p-2 my-2 h-100 text-center shadow">
+                            {% if poll.picture.url is not null %}
+                            <img src="{{poll.picture.url}}" class="card-img-top align-self-center" style="height: 150px; width: 150px;">
+                            {% else %}
+                            <img src="{% static 'image/logo.png' %}" class="card-img-top align-self-center" style="height: 150px; width: 150px;">
+                            {% endif %}
+                            <div class="card-body pb-0 px-0">
+                                <h5 class="card-title">{{poll.subject}}</h5><br>
+                                <p class="text-success" style="font-size: 0.8rem;">Start: {{poll.start_date}}</p>
+                                <p class="text-danger" style="font-size: 0.8rem;">End: {{poll.end_date}}</p>
+                                {% if poll.password == '' %}
+                                    <a href="{% url 'votePage' poll_id=poll.id %}" class="btn btn-primary">โหวต</a>
+                                {% else %}
+                                    <a href="{% url 'needPassword' poll_id=poll.id %}" class="btn btn-dark">ปลดล็อค</a>
+                                {% endif %}
+                                
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <br><br>
+    <div class="container">
+        <h1 class="headva">Closed</h1><hr>
+        <div class="row">
+            {% for poll in all_poll%}
+                {% if time < poll.start_date or time >= poll.end_date %}
+                    <div class="col-3 my-2">
+                        <div class="card p-2 my-2 h-100 text-center shadow">
+                            {% if poll.picture.url is not null%}
+                            <img src="{{poll.picture.url}}" class="card-img-top align-self-center" style="height: 150px; width: 150px;">
+                            {% else %}
+                            <img src="{% static 'image/logo.png' %}" class="card-img-top align-self-center" style="height: 150px; width: 150px;">
+                            {% endif %}
+                            <div class="card-body pb-0 px-0">
+                                <h5 class="card-title">{{poll.subject}}</h5><br>
+                                <p class="text-success" style="font-size: 0.8rem;">Start: {{poll.start_date}}</p>
+                                <p class="text-danger" style="font-size: 0.8rem;">End: {{poll.end_date}}</p>
+                                {% if poll.password %}
+                                {% endif %}
+                                <a href="{% url 'reportVote' poll.id %}" class="btn btn-warning">ดูผลโหวต</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

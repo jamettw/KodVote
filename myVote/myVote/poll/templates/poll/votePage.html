@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div>
+<h1 class="headva">{{poll.subject}}</h1><br>
+<h5 class="descva mb-5">{{poll.detail}}</h5>
+</div>
+<div class="row">
+    {% for choice in all_choice %}
+        <div class="col-6 text-center my-3 align-self-center"><a href="{% url 'voteComplete' choice.id %}">
+            <button class="btn btn-outline-warning my-2 my-sm-0 align-self-center">{{choice.subject}}</button></a>
+            
+            {% if choice.image.url is not null %}
+                <img src="{{choice.image.url}}" class="mx-2 " style="height: 150px; width: 150px;">
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

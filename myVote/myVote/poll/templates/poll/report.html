@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+        <div class="align-self-center">
+            <div class="card p-5 shadow-sm mb-5 rounded">
+                <div class="align-self-center text-center">
+                    <h1>ผลการโหวต "{{poll.subject}}"</h1>
+                </div><br>
+                <div class="row">
+                    {% for i in amount %}
+                        <div class="col-6">
+                            <p>ตัวเลือกที่ {{forloop.counter}} : {{i}} คน</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
